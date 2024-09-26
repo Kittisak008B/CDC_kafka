@@ -1,3 +1,4 @@
+-- db01: Create a database and a table, then insert data into the table
 CREATE DATABASE database_demo;
 SHOW databases;
 USE database_demo;
@@ -5,8 +6,8 @@ SHOW tables;
 
 DROP TABLE IF EXISTS transaction;
 CREATE TABLE IF NOT EXISTS transaction (transaction_id INT ,
-					                    date DATE,
-					                    datetime DATETIME,          
+					date DATE,
+					datetime DATETIME,          
                                         cash_type VARCHAR(255),
                                         card VARCHAR(255),
                                         money FLOAT,
