@@ -1,15 +1,29 @@
-# CDC_kafka
+<h1> CDC_kafka (change data capture)</h1> 
+<p align="center">
+  <img src="./pics/overview.png" width="900"> <br>
+  overview <br>
+</p>
+<p>
+  <img src="./pics/instance.png" width="700"> <br>
+  cloud sql instance <br>
+  <img src="./pics/vm.png" width="700"> <br>
+  VM (virsual machine) <br>
+</p>
+<h4>-Authorized networks for connecting to cloudsql : go to connections->Networking->add the VM's external IP address , local IP</h4> 
+<h4>-Edit firewall rules </h4>
+<p>
+  <img src="./pics/firewall_rule.png" width="500"> <br>
+</p>
 
-## VM
-#### Update the package list
-```bash
-sudo apt update
-```
-#### Install Git
+<h2> VM </h2>
+<h4> Update the package list </h4> 
+<pre><code> sudo apt update </code></pre>
+
+#### Install Git on VM
 ```bash
 sudo apt install git
 ```
-#### Install Docker 
+#### Install Docker on VM
 ```bash
 curl -fsSL https://get.docker.com | sh
 ```
@@ -30,14 +44,25 @@ docker run hello-world
 ```bash
 df -h
 ```
-```bash
-git clone https://github.com/Kittisak008B/CDC_kafka.git
+<h4> Start all services on VM </h4> 
+<pre><code>git clone https://github.com/Kittisak008B/CDC_kafka.git
 cd CDC_kafka/
 docker compose up -d
-docker ps -a
-```
+docker ps -a</code></pre>
 
-#### mysql-source.json
+- Zookeeper: Manages Kafka brokers.
+- Kafka Broker: Processes and stores messages in topics.
+- Schema Registry: Manages and validates message schemas.
+- Kafka Connect: Integrates Kafka with external systems.
+- Control Center: Web UI for managing Kafka.
+- ksqlDB: SQL engine for stream processing.
+  
+<p>
+  go to [VM's_external_IP_address]:9021 
+  <img src="./pics/kafka01.png" width="800"> <br>
+</p>
+
+### mysql-source.json
 ```
 {
   "name": "mysql-source-kafka",
@@ -64,7 +89,13 @@ docker ps -a
 ```bash
 curl -i -X POST -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8083/connectors/ -d @mysql-source.json
 ```
-#### mysql-sink-kafka.json
+<p>
+  <img src="./pics/kafka02.png" width="800"> <br>
+  Received 3 new topics <br>
+  <img src="./pics/kafka03.png" width="800"> <br>
+</p>
+
+### mysql-sink-kafka.json
 ```
 {
     "name": "mysql-sink-kafka",
@@ -105,6 +136,22 @@ curl -i -X POST -H "Accept: application/json" -H "Content-Type: application/json
 ```bash
 curl -i -X POST -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8083/connectors/ -d @mysql-sink-kafka.json
 ```
+<p>
+  <img src="./pics/kafka04.png" width="800"> <br>
+</p>
+
+<h2> Test change data capture between two databases </h2>
+<p>
+  <img src="./pics/test01.png" width="800"> <br>
+  <img src="./pics/test02.png" width="800"> <br>
+  <img src="./pics/test03.png" width="800"> <br>
+  <img src="./pics/test04.png" width="800"> <br>
+  <img src="./pics/test05.png" width="800"> <br>
+  <img src="./pics/test06.png" width="800"> <br>
+  <img src="./pics/test07.png" width="800"> <br>
+  <img src="./pics/test08.png" width="800"> <br>
+  <img src="./pics/test09.png" width="800"> <br>
+</p>
 
 #### execute a command in a running container
 ```bash
@@ -122,13 +169,9 @@ ls -lrt -R | grep "mysql-connector-java-8.0.13.jar"
 docker logs [CONTAINER_NAME]
 docker logs connect | grep mysql-sink-kafka
 ```
+#### Stop , delete containers , delete volumes with database data and download images
 ```bash
 docker compose down --volumes --rmi all
 ```
-
-- Zookeeper: Manages Kafka brokers.
-- Kafka Broker: Processes and stores messages in topics.
-- Schema Registry: Manages and validates message schemas.
-- Kafka Connect: Integrates Kafka with external systems.
-- Control Center: Web UI for managing Kafka.
-- ksqlDB: SQL engine for stream processing.
+## Reference
+https://github.com/nuttatunc/kafka-r2de-demo
