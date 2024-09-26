@@ -1,0 +1,20 @@
+{
+    "name": "mysql-source-kafka",
+    "config": {
+      "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+      "database.hostname": "35.202.118.225",
+      "database.port": "3306",
+      "database.user": "root",
+      "database.password": "root",
+      "database.server.name": "db01",
+      "table.whitelist": "database_demo.transaction",
+      "database.history.kafka.bootstrap.servers": "broker:9092",
+      "database.history.kafka.topic": "transaction",
+      "decimal.handling.mode": "double",
+      "include.schema.changes": "true",
+      "key.converter": "io.confluent.connect.avro.AvroConverter",
+      "value.converter": "io.confluent.connect.avro.AvroConverter",
+      "key.converter.schema.registry.url": "http://schema-registry:8081",
+      "value.converter.schema.registry.url": "http://schema-registry:8081"
+    }
+  }
