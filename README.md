@@ -1,7 +1,8 @@
 <h1> CDC_kafka (change data capture)</h1> 
-<p align="center">
+<p>
   <img src="./pics/overview.png" width="900"> <br>
-  overview <br>
+  - Using Kafka, a distributed streaming platform, to monitor and capture changes in data from a database(db01) and replicate those changes to another database(db02).<br>
+  - Deploy Kafka on Docker in a virtual machine, using Debezium as the source connector and Java JDBC as the sink connector. <br>
 </p>
 <p>
   <img src="./pics/instance.png" width="700"> <br>
