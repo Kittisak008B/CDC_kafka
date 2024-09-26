@@ -51,10 +51,10 @@ docker compose up -d
 docker ps -a</code></pre>
 
 - Zookeeper: Manages Kafka brokers.
-- Kafka Broker: Processes and stores messages in topics.
-- Schema Registry: Manages and validates message schemas.
-- Kafka Connect: Integrates Kafka with external systems.
-- Control Center: Web UI for managing Kafka.
+- Kafka Broker: stores, distributes, and replicates messages between producers and consumers in a Kafka cluster
+- Schema Registry: Manages the schemas of messages in Kafka, ensuring compatibility between producers and consumers
+- Kafka Connect: Moves data between Kafka and other systems, used here for Change Data Capture (CDC)
+- Control Center: Web UI for managing and monitoring Kafka.
 - ksqlDB: SQL engine for stream processing.
   
 <p>
