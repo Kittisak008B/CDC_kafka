@@ -26,3 +26,7 @@ INSERT INTO transaction (transaction_id, date, datetime, cash_type, card, money,
 
 -- DELETE FROM transaction WHERE card = 'NO-0001';
 -- DELETE FROM transaction WHERE coffee_id = 5;
+
+-- UPDATE database_demo.transaction SET money=888 WHERE transaction_id = 4;
+
+-- DELETE FROM database_demo.transaction WHERE transaction_id = 4;
