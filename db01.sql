@@ -1,4 +1,4 @@
--- db01: Create a database and a table, then insert data into the table
+-- db01: create a database and a table, then insert data into the table
 CREATE DATABASE database_demo;
 SHOW databases;
 USE database_demo;
